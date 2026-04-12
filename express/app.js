@@ -2,12 +2,12 @@ import express from "express";
 
 const app = express();
 
-app.use("/users", (_, res, next) => {
+app.get("/users", (_, res, next) => {
   res.send("Users route");
   next();
 });
 
-app.use("/", (_, res) => {
+app.get("/", (_, res) => {
   res.send("GENERAL");
   console.log("GENERAL");
 });
