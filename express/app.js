@@ -2,16 +2,16 @@ import express from "express";
 
 const app = express();
 
-app.get("/users", (_, res, next) => {
-  res.send("Users route");
-  next();
+import adminRoutes from "./routes/admin.js";
+import shopRoutes from "./routes/shop.js";
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+
+app.use((req, res, next) => {
+  res.status(404).send("<h1>Page not found</h1>");
 });
 
-app.get("/", (_, res) => {
-  res.send("GENERAL");
-  console.log("GENERAL");
-});
-
-app.listen(3000, () => {
-  console.log("Server running at http://localhost:3000/");
-});
+app.listen(3000);
